@@ -1,0 +1,126 @@
+/* Navbar stilleri */
+.navbar {
+    background-color: #cc2e38 !important; /* Navbar arka plan rengi */
+    padding: 10px; /* Navbar içeriği ile arasındaki boşluk */
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.navbar-brand {
+    color: #ffc12d; /* Navbar marka yazısı rengi */
+    font-weight: bold; /* Navbar marka yazısı kalınlığı */
+    margin-right: 20px; /* Navbar marka yazısı ile diğer içerik arasındaki boşluk */
+    transition: color 0.3s; /* Renk değişimi için geçiş süresi */
+}
+
+#navbarDropdown {
+    color:  #ffc12d;
+}
+.navbar-brand:hover {
+    color: #f6eff2; /* Hover efekti için yeni renk */
+}
+
+.nav-item .dropdown-toggle:hover{
+    color: rgb(255, 255, 255);
+
+}
+.dropdown-item{
+    color: #c10909;
+}
+
+.dropdown-item:hover{
+    color: #e8742c;
+}
+
+
+.navbar-nav {
+    display: flex; /* Öğeleri yatayda hizalar */
+    align-items: center; /* Dikeyde hizalar */
+    justify-content: space-between; /* Öğeleri yatayda eşit aralıklarla dağıtır */
+}
+
+.nav-item {
+    margin-right: 1px; /* Her öğe arasına sağdan boşluk bırakma */
+}
+.nav-item > .nav-link {
+    color: #ffc12d;
+}
+.nav-link:hover {
+    color: #f6eff2; /* Üzerine gelindiğinde metin rengi */
+}
+
+.searchsubmit {
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Center the search input and button */
+.searchsubmit form {
+    display: flex;
+    justify-content: center;
+}
+
+.searchsubmit form .form-control {
+    margin-right: 10px; /* Adjust spacing between input and button */
+}
+
+.login-btn,
+.signup-btn {
+    margin-left: 10px;
+}
+.btn:active {
+    background-color: #cc2e38 !important; /* Tıklama rengini istediğiniz renge ayarlayın */
+}
+
+.btn{
+    background-color: #f89526;
+    color: #ffffff;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #f89526;
+    color: #ffffff;
+    border-radius: 50%;
+    
+}
+body{
+    background-color: #f58929;
+    background-image: url('./images/logo.png'); /* Resmin yolunu buraya ekleyin */
+    /* background-size: cover; Resmi ekran boyutuna sığdır */
+    /* background-position: center; Resmi ortala */
+    /* background-repeat:repeat; */
+}
+
+.carousel-inner
+{
+    border-radius: 30px;
+}
+
+  
+@media (max-width: 991.98px) {
+    .searchsubmit {
+        order: 3;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .login-btn,
+    .signup-btn {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .navbar-nav .nav-item {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .navbar-collapse {
+        justify-content: center;
+    }
+}
