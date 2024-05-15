@@ -1,4 +1,17 @@
 /* Navbar stilleri */
+*{
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+a {
+    text-decoration: none !important; /* a etiketinin altını çizgisini kaldır */
+}
+.card {
+    border: 3px solid #cc2e38; /* Kartın kenarlarına ince bir çerçeve ekle */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) ; /* Kartın altına hafif bir gölge ekle */
+}
+
 .navbar {
     background-color: #cc2e38 !important; /* Navbar arka plan rengi */
     padding: 10px; /* Navbar içeriği ile arasındaki boşluk */
@@ -12,6 +25,37 @@
     margin-right: 20px; /* Navbar marka yazısı ile diğer içerik arasındaki boşluk */
     transition: color 0.3s; /* Renk değişimi için geçiş süresi */
 }
+
+footer {
+    background-color: #cc2e38;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease; /* Hareket geçiş efekti */
+}
+
+.card-title
+{
+    text-align: center;
+}
+
+.navbar {
+    margin-bottom: 20px; /* Navbar ile içerik arasına boşluk ekler */
+}
+
+.carousel-inner img {
+    margin-bottom: 20px; /* Resim ile içerik arasına boşluk ekler */
+    border: 3px solid #cc2e38; /* Kartın kenarlarına ince bir çerçeve ekle */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) ; /* Kartın altına hafif bir gölge ekle */
+}
+
+footer {
+    margin-top: 20px; /* Footer ile içerik arasına boşluk ekler */
+    margin-bottom: 20px; /* Footer ile içerik arasına boşluk ekler */
+}
+
 
 #navbarDropdown {
     color:  #ffc12d;
@@ -85,42 +129,28 @@
     
 }
 body{
-    background-color: #f58929;
-    background-image: url('./images/logo.png'); /* Resmin yolunu buraya ekleyin */
+    background-color: #ffffff;
     /* background-size: cover; Resmi ekran boyutuna sığdır */
     /* background-position: center; Resmi ortala */
     /* background-repeat:repeat; */
 }
 
-.carousel-inner
-{
-    border-radius: 30px;
+.card:hover {
+    transform: translateY(-10px); /* Kartı yukarı doğru 5 piksel kaydır */
+    transition: transform 0.3s ease; /* Hareketi yumuşatmak için geçiş efekti ekle */
 }
 
-  
-@media (max-width: 991.98px) {
-    .searchsubmit {
-        order: 3;
-        margin: 0 auto;
-        text-align: center;
-    }
 
-    .login-btn,
-    .signup-btn {
-        margin-left: 0;
-        margin-top: 10px;
-    }
-
+@media (max-width: 767.98px) { /* Küçük ekranlar için */
     .navbar-nav {
-        flex-direction: column;
+        flex-direction: column; /* Öğeleri dikey hale getir */
     }
-
     .navbar-nav .nav-item {
         margin-right: 0;
-        margin-bottom: 5px;
+        margin-bottom: 5px; /* Öğeler arası boşluk */
     }
-
     .navbar-collapse {
-        justify-content: center;
+        justify-content: center; /* Öğeleri ortala */
     }
 }
+
