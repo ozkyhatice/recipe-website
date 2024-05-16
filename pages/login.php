@@ -102,6 +102,33 @@
         </div>
       </div>
     </div>
+    <?php
+session_start();
+
+// Kullanıcı adı ve şifreyi kontrol et
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
+    $username = "admin";
+    $password = "12345";
+
+    // Formdan gelen kullanıcı adı ve şifre
+    $input_username = $_POST["username"];
+    $input_password = $_POST["password"];
+
+    // Girilen kullanıcı adı ve şifre doğruysa yönlendir
+    if ($input_username === $username && $input_password === $password) {
+        // Giriş başarılı, yönlendirme
+        header("Location: ../pages/add_recipe.php");
+        exit;
+    } else {
+        // Giriş başarısız, hata mesajı veya yeniden yönlendirme
+        // Örneğin:
+        // header("Location: index.php?error=1");
+        // exit;
+        header("Location: ../index.php"); // Hata durumunda index.php'ye geri dön
+        exit;
+    }
+}
+?>
 
     <script src="../js/login.js"></script>
   </body>
