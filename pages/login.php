@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
         // Örneğin:
         // header("Location: index.php?error=1");
         // exit;
-        header("Location: ../index.php"); // Hata durumunda index.php'ye geri dön
+        header("Location: ../index2.php"); // Hata durumunda index.php'ye geri dön
         exit;
     }
 }
