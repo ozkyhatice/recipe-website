@@ -36,7 +36,7 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
       <div class="col">
         <a href="./pages/breakfast.php" class="card-link" >
         <div class="card h-100">
@@ -59,6 +59,18 @@
           </div>
           
         </div></a>
+        <div class="col">
+        <a href="./pages/main.php" class="card-link">
+        <div class="card h-100">
+          <img src="./images/mainc.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">MAIN COURSE</h5>
+            <p class="card-text">
+            Explore our flavorful main course recipes that will delight your taste buds and satisfy your hunger. From savory pastas to succulent meat dishes, our collection offers a wide range of options for every occasion and palate.</p>
+</p>
+          </div>
+          
+        </div></a>
       </div>
       <div class="col">
         <a href="./pages/dessert.php" class="card-link">
@@ -72,7 +84,6 @@
           
         </div></a>
       </div>
-      
       
     </div>
     <?php

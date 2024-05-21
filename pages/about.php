@@ -15,6 +15,8 @@
 </head>
 <body>
 <?php
+session_start(); // Oturumu başlat
+
     // Navbar'ı çağırıyoruz
     include '../navbar2.php';
     ?>

@@ -72,6 +72,8 @@
 </body>
 </html>
 <?php
+session_start(); // Oturumu başlat
+
 // Veritabanı bağlantısı
 include("../baglanti.php");
 $conn = mysqli_connect("localhost", "root", "", "hzchefs");

@@ -19,6 +19,8 @@
 <body>
 <?php
 include("../navbar2.php");
+?>
+<?php
 session_start();
 
 // Veritabanı bağlantısını burada yapmalısınız
