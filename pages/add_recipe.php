@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +19,7 @@
     ?>
     <div class="container">
         <h1>Add Recipe</h1>
-        <form  method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
             <label for="recipe_name">Recipe Name:</label>
             <input type="text" id="recipe_name" name="recipe_name" required>
             
@@ -63,46 +62,54 @@
         </form>
     </div>
     <?php
-    // Navbar'ı çağırıyoruz
+    // Footer'ı çağırıyoruz
     include '../footer.php';
     ?>
-
-
-    <script src="../js/add_recipes.js"></script>
+    <script src="/cook/js/add_recipes.js"></script>
 </body>
 </html>
 <?php
-session_start(); // Oturumu başlat
 
 // Veritabanı bağlantısı
 include("../baglanti.php");
 $conn = mysqli_connect("localhost", "root", "", "hzchefs");
-    
-    // Bağlantıyı kontrol et
-    if (!$conn) {
-        die("Veritabanı bağlantısı başarısız: " . mysqli_connect_error());
-    }
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Formdan gelen verileri al
-        $recipe_name = $_POST["recipe_name"];
-        $category = $_POST["category"];
-        $prep_time = $_POST["prep_time"];
-        $cook_time = $_POST["cook_time"];
-        $ingredients = $_POST["ingredients"];
-        $instructions = $_POST["instructions"];
-        $image = $_FILES["image"]["name"];
-        $difficulty = $_POST["difficulty"];
-        $serving_size = $_POST["serving_size"];
-        
-        // SQL sorgusu
-        $sql = "INSERT INTO recipes (recipe_name, category, prep_time, cook_time, ingredients, instructions, image, difficulty, serving_size) 
-                VALUES ('$recipe_name', '$category', '$prep_time', '$cook_time', '$ingredients', '$instructions', '$image', '$difficulty', '$serving_size')";
-        
-        // Sorguyu çalıştır ve sonucu kontrol et
-        if (mysqli_query($conn, $sql)) {
-            echo "Tarif başarıyla eklendi.";
+
+// Bağlantıyı kontrol et
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $recipe_name = $_POST['recipe_name'];
+    $category = $_POST['category'];
+    $prep_time = $_POST['prep_time'];
+    $cook_time = $_POST['cook_time'];
+    $ingredients = $_POST['ingredients'];
+    $instructions = $_POST['instructions'];
+    $difficulty = $_POST['difficulty'];
+    $serving_size = $_POST['serving_size'];
+
+    // Resim yükleme işlemi
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $image = $_FILES['image']['tmp_name'];
+        $image_name = basename($_FILES['image']['name']);
+        $target_dir = '../images/'; // Hedef dizin
+        $target_file = $target_dir . $image_name;
+
+        // Dosyayı hedef dizine taşı
+        if (move_uploaded_file($image, $target_file)) {
+            // Resim yolu veritabanına kaydedilecek
+            $image_path = 'images/' . $image_name;
+
+            $sql = "INSERT INTO recipes (recipe_name, category, prep_time, cook_time, ingredients, instructions, difficulty, serving_size, image) 
+                    VALUES ('$recipe_name', '$category', '$prep_time', '$cook_time', '$ingredients', '$instructions', '$difficulty', '$serving_size', '$image_path')";
+
+            if (mysqli_query($conn, $sql)) {
+                echo "Tarif başarıyla eklendi.";
+            } else {
+                echo "Hata: " . $sql . "<br>" . mysqli_error($conn);
+            }
         } else {
-            echo "Hata: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Resim yüklenirken hata oluştu.";
         }
+    } else {
+        echo "Resim dosyası yüklenirken hata oluştu: " . $_FILES['image']['error'];
     }
-    ?>
+}
+?>

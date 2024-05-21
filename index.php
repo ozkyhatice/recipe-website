@@ -21,44 +21,47 @@
     ?>
 
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="./images/cookingwithavocado912.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./images/cookingwithavocado912.jpg" class="d-block w-100" alt="...">
+            </div>
+
         </div>
-        
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col">
-        <a href="./pages/breakfast.php" class="card-link" >
-        <div class="card h-100">
-          <img src="./images/breakfast.jpeg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">BREAKFAST</h5>
-            <p class="card-text">
-              Breakfast is essential for starting your day right and boosting metabolism. My collection of breakfast recipes offers filling yet light options, including smoothies and fluffy pancakes. With these recipes, you'll have delicious choices for every day of the week.</p>
-          </div>
-          
-        </div></a>
-      </div>
-      <div class="col">
-        <a href="./pages/soup.php" class="card-link">
-        <div class="card h-100">
-          <img src="./images/soup.jpeg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">SOUP</h5>
-            <p class="card-text">This collection contains delicious soups that you can enjoy in every season. It includes simple classics as well as vegan options. Soups are perfect comforting foods that will warm both your stomach and your heart.</p>
-          </div>
-          
-        </div></a>
+        <div class="col">
+            <a href="./pages/breakfast.php" class="card-link">
+                <div class="card h-100">
+                    <img src="./images/breakfast.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">BREAKFAST</h5>
+                        <p class="card-text">
+                            Breakfast is essential for starting your day right and boosting metabolism. My collection of breakfast recipes offers filling yet light options, including smoothies and fluffy pancakes. With these recipes, you'll have delicious choices for every day of the week.</p>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="./pages/soup.php" class="card-link">
+                <div class="card h-100">
+                    <img src="./images/soup.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">SOUP</h5>
+                        <p class="card-text">This collection contains delicious soups that you can enjoy in every season. It includes simple classics as well as vegan options. Soups are perfect comforting foods that will warm both your stomach and your heart.</p>
+                    </div>
+
+                </div>
+            </a>
+        </div>
         <div class="col">
         <a href="./pages/main.php" class="card-link">
         <div class="card h-100">
@@ -72,19 +75,20 @@
           
         </div></a>
       </div>
-      <div class="col">
-        <a href="./pages/dessert.php" class="card-link">
-        <div class="card h-100">
-          <img src="./images/dessert.jpeg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">DESSERT</h5>
-            <p class="card-text">
-              Indulge yourself with delicious desserts that are both simple and satisfying. From cookies to brownies, there's something for everyone. Even if baking isn't your forte, there are quick and easy no-bake options. These treats are inspired by classics and promise to satisfy your sweet cravings guilt-free!</p>
-          </div>
-          
-        </div></a>
-      </div>
-      
+        <div class="col">
+            <a href="./pages/dessert.php" class="card-link">
+                <div class="card h-100">
+                    <img src="./images/dessert.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">DESSERT</h5>
+                        <p class="card-text">
+                            Indulge yourself with delicious desserts that are both simple and satisfying. From cookies to brownies, there's something for everyone. Even if baking isn't your forte, there are quick and easy no-bake options. These treats are inspired by classics and promise to satisfy your sweet cravings guilt-free!</p>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+
     </div>
     <?php
     // Navbar'ı çağırıyoruz

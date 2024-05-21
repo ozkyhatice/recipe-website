@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="./index.php">HOME <span class="sr-only"></span></a>
+          <a class="nav-link" href="/cook/index.php">HOME <span class="sr-only"></span></a>
         </li>
         
         <li class="nav-item dropdown">
@@ -19,9 +19,10 @@
           </a>
           
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="./pages/breakfast.php">Breakfast</a>
-            <a class="dropdown-item" href="./pages/soup.php">Soup</a>
-            <a class="dropdown-item" href="./pages/dessert.php">Dessert</a>
+            <a class="dropdown-item" href="/cook/pages/breakfast.php">Breakfast</a>
+            <a class="dropdown-item" href="/cook/pages/soup.php">Soup</a>
+        <a class="dropdown-item" href="/cook/pages/main.php">Main Course</a>
+            <a class="dropdown-item" href="/cook/pages/dessert.php">Dessert</a>
             <!-- <div class="dropdown-divider"></div> -->
           </div>
         </li>
