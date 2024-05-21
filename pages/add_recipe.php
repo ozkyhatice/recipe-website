@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +20,7 @@
     ?>
     <div class="container">
         <h1>Add Recipe</h1>
-        <form action="submit_recipe.php" method="post" enctype="multipart/form-data">
+        <form  method="post" enctype="multipart/form-data">
             <label for="recipe_name">Recipe Name:</label>
             <input type="text" id="recipe_name" name="recipe_name" required>
             
@@ -66,49 +67,40 @@
     include '../footer.php';
     ?>
 
-<?php
-// Veritabanı bağlantısı
-$serverName = "localhost";
-$connectionOptions = array(
-    "Database" => "recipesdatabase",
-    "Uid" => "SA",
-    "PWD" => "reallyStrongPwd123"
-);
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-
-if ($conn === false) {
-    die(print_r(sqlsrv_errors(), true));
-}
-
-// Formdan gelen verileri al
-$recipe_name = $_POST["recipe_name"];
-$category = $_POST["category"];
-$prep_time = $_POST["prep_time"];
-$cook_time = $_POST["cook_time"];
-$ingredients = $_POST["ingredients"];
-$instructions = $_POST["instructions"];
-$image = $_FILES["image"]["name"];
-$difficulty = $_POST["difficulty"];
-$serving_size = $_POST["serving_size"];
-
-// SQL sorgusu
-$sql = "INSERT INTO recipes (recipe_name, category, prep_time, cook_time, ingredients, instructions, image, difficulty, serving_size) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-// Sorguyu hazırla
-$stmt = sqlsrv_prepare($conn, $sql, array(&$recipe_name, &$category, &$prep_time, &$cook_time, &$ingredients, &$instructions, &$image, &$difficulty, &$serving_size));
-
-// Sorguyu çalıştır ve sonucu kontrol et
-if (sqlsrv_execute($stmt) === false) {
-    die(print_r(sqlsrv_errors(), true));
-} else {
-    echo "Tarif başarıyla eklendi.";
-}
-
-// Bağlantıyı kapat
-sqlsrv_close($conn);
-?>
 
     <script src="../js/add_recipes.js"></script>
 </body>
 </html>
+<?php
+// Veritabanı bağlantısı
+include("../baglanti.php");
+$conn = mysqli_connect("localhost", "root", "", "hzchefs");
+    
+    // Bağlantıyı kontrol et
+    if (!$conn) {
+        die("Veritabanı bağlantısı başarısız: " . mysqli_connect_error());
+    }
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Formdan gelen verileri al
+        $recipe_name = $_POST["recipe_name"];
+        $category = $_POST["category"];
+        $prep_time = $_POST["prep_time"];
+        $cook_time = $_POST["cook_time"];
+        $ingredients = $_POST["ingredients"];
+        $instructions = $_POST["instructions"];
+        $image = $_FILES["image"]["name"];
+        $difficulty = $_POST["difficulty"];
+        $serving_size = $_POST["serving_size"];
+        
+        // SQL sorgusu
+        $sql = "INSERT INTO recipes (recipe_name, category, prep_time, cook_time, ingredients, instructions, image, difficulty, serving_size) 
+                VALUES ('$recipe_name', '$category', '$prep_time', '$cook_time', '$ingredients', '$instructions', '$image', '$difficulty', '$serving_size')";
+        
+        // Sorguyu çalıştır ve sonucu kontrol et
+        if (mysqli_query($conn, $sql)) {
+            echo "Tarif başarıyla eklendi.";
+        } else {
+            echo "Hata: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
+    ?>

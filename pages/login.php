@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,7 +20,7 @@
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="sign-in-form">
+          <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" class="sign-in-form">
             <h2 class="title">Sign In</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
@@ -102,34 +103,113 @@
         </div>
       </div>
     </div>
+    <!-- Add this section after the forms -->
     <?php
 session_start();
+include ("../baglanti.php");
 
-// Kullanıcı adı ve şifreyi kontrol et
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
-    $username = "admin";
-    $password = "12345";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["login"])) { // Giriş formu gönderildiyse
+        $username = $_POST["username"];
+        $password = $_POST["password"];
 
-    // Formdan gelen kullanıcı adı ve şifre
-    $input_username = $_POST["username"];
-    $input_password = $_POST["password"];
+        if (empty($username) || empty($password)) {
+            echo "<script>
+                    alert('Username or password empty!'); window.location.href='./login.php';
+                  </script>";
+            exit;
+        } else {
+            $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                $_SESSION['oturum'] = true;
+                $_SESSION['username'] = $username;
+                $_SESSION['password'] = $password;
+                print 'Hoş geldiniz ' . $username;
+                if ($username == 'admin' && $password == '12345') {
+                    header('Location: ./add_recipe.php');
+                    exit;
+                } else {
+                    header('Location: ../index2.php');
+                    exit;
+                }
+            } else {
+                echo "<script>
+                        alert('HATALI KULLANICI BİLGİSİ!');
+                      </script>";
+            }
+            mysqli_close($conn);
+        }
+    } 
+    elseif (isset($_POST["register"])) { // Kayıt formu gönderildiyse
+      $new_username = $_POST["new_username"];
+      $email = $_POST["email"];
+      $new_password = $_POST["new_password"];
 
-    // Girilen kullanıcı adı ve şifre doğruysa yönlendir
-    if ($input_username === $username && $input_password === $password) {
-        // Giriş başarılı, yönlendirme
-        header("Location: ../pages/add_recipe.php");
-        exit;
-    } else {
-        // Giriş başarısız, hata mesajı veya yeniden yönlendirme
-        // Örneğin:
-        // header("Location: index.php?error=1");
-        // exit;
-        header("Location: ../index2.php"); // Hata durumunda index.php'ye geri dön
+      // Boş input kontrolü
+      if (empty($new_username) || empty($email) || empty($new_password)) {
+          echo "<script>
+                  alert('Please fill all fields!'); window.location.href='./login.php';
+                </script>";
+          exit;
+      }
+      if (strlen($new_username) < 5) {
+        $_SESSION['register_error'] = "Kullanıcı adı en az 5 karakter olmalıdır.";
+        header("Location: ./login.php");
         exit;
     }
-}
-?>
 
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['register_error'] = "Geçersiz e-posta adresi formatı.";
+        header("Location: ./login.php");
+        exit;
+    }
+
+    // E-posta adresinin alan adını alma
+    $domain = explode('@', $email)[1];
+
+    // Alan adının DNS kayıtlarını kontrol etme
+    if (!checkdnsrr($domain, "MX")) {
+        $_SESSION['register_error'] = "E-posta adresi alanı doğrulanamadı.";
+        header("Location: ./login.php");
+        exit;
+    }
+
+      // Kullanıcı adının benzersiz olup olmadığını kontrol etme
+      $check_username_query = "SELECT * FROM users WHERE username='$new_username'";
+      $check_username_result = mysqli_query($conn, $check_username_query);
+      if (mysqli_num_rows($check_username_result) > 0) {
+          echo "<script>
+                  alert('This username is already taken! Please choose a different one.'); window.location.href='./login.php';
+                </script>";
+          exit;
+      }
+      $check_email_query = "SELECT * FROM users WHERE email='$email'";
+        $check_email_result = mysqli_query($conn, $check_email_query);
+        if (mysqli_num_rows($check_email_result) > 0) {
+            echo "<script>
+                    alert('This email is already registered! Please use a different one.'); window.location.href='./login.php';
+                  </script>";
+            exit;
+        }
+
+      
+      // Kullanıcıyı veritabanına ekleme
+      $sql = "INSERT INTO users (username, email, password) VALUES ('$new_username', '$email', '$new_password')";
+      if (mysqli_query($conn, $sql)) {
+          echo "<script>
+                  alert('User registered successfully!'); window.location.href='./login.php';
+                </script>";
+          exit;
+      } else {
+          echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+      }
+
+      mysqli_close($conn);
+  }
+}
+
+?>
     <script src="../js/login.js"></script>
   </body>
 </html>

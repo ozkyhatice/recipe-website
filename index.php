@@ -1,7 +1,3 @@
-<?php
-// Burada PHP kodu olmadığı için herhangi bir işlem yapmıyoruz.
-// Sadece HTML kodunu PHP dosyasına yerleştiriyoruz.
-?>
 
 <!DOCTYPE html>
 <html lang="en">
