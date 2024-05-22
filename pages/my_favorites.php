@@ -52,25 +52,24 @@ if(isset($_GET['category']) && !empty($_GET['category'])) {
 <body>
     <?php include("../navbar2.php"); ?>
     <div class="container">
-        <h1 class="mb-4">My Favorite Recipes</h1>
-        <form action="" method="get" class="mb-3">
-            <div class="input-group">
-                <label class="input-group-text" for="categoryFilter">Filter by Category:</label>
-                <select class="form-select" id="categoryFilter" name="category">
-    <option value="">Select</option>
-    <option value="Breakfast">Breakfast</option>
-    <option value="Soup">Soup</option>
-    <option value="Main Course">Main Course</option>
-    <option value="Dessert">Dessert</option>
-</select>
-
-                <button type="submit" class="btn btn-primary">Apply Filter</button>
-            </div>
-        </form>
-        <div class="row">
+    <h1 class="mb-4">My Favorite Recipes</h1>
+    <form action="" method="get" class="mb-3">
+        <div class="input-group">
+            <label class="input-group-text" for="categoryFilter">Filter by Category:</label>
+            <select class="form-select" id="categoryFilter" name="category">
+                <option value="">All</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Soup">Soup</option>
+                <option value="Main Course">Main Course</option>
+                <option value="Dessert">Dessert</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Apply Filter</button>
+        </div>
+    </form>
+    <div class="row">
         <?php
         // Kullanıcının favori tariflerini al
-        $sql = "SELECT r.id, r.recipe_name, r.category, r.prep_time, r.cook_time, r.ingredients, r.instructions, r.image, r.difficulty, r.serving_size
+        $sql = "SELECT r.id, r.recipe_name, r.category, r.instructions
                 FROM recipes r
                 INNER JOIN user_favorites uf ON r.id = uf.recipe_id
                 INNER JOIN users u ON uf.user_id = u.id
@@ -83,27 +82,14 @@ if(isset($_GET['category']) && !empty($_GET['category'])) {
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='col-md-6 col-lg-4 mb-4'>";
                 echo "<div class='card h-100'>";
-                echo "<div class='row g-0 h-100'>";
-                echo "<div class='col-12'>";
-                echo "<img src='../images/" . $row["image"] . "' class='card-img-top img-fluid' alt='" . $row["recipe_name"] . "'>";
-                echo "</div>";
-                echo "<div class='col-12'>";
                 echo "<div class='card-body'>";
                 echo "<h5 class='card-title'>" . $row["recipe_name"] . "</h5>";
-                echo "<p class='card-text'><strong>Category:</strong> " . $row["category"] . "</p>";
-                echo "<p class='card-text'><strong>Preparation Time:</strong> " . $row["prep_time"] . " minutes</p>";
-                echo "<p class='card-text'><strong>Cooking Time:</strong> " . $row["cook_time"] . " minutes</p>";
-                echo "<p class='card-text'><strong>Ingredients:</strong> " . $row["ingredients"] . "</p>";
-                echo "<p class='card-text'><strong>Instructions:</strong> " . $row["instructions"] . "</p>";
-                echo "<p class='card-text'><strong>Difficulty:</strong> " . $row["difficulty"] . "</p>";
-                echo "<p class='card-text'><strong>Serving Size:</strong> " . $row["serving_size"] . "</p>";
+                echo "<p class='card-text'>" . $row["instructions"] . "</p>";
+                echo "<a href='recipe_details.php?recipe_id=" . $row["id"] . "' class='btn btn-primary'>View Recipe</a>";
+               
                 echo "<form action='remove_favorite.php' method='post'>";
                 echo "<input type='hidden' name='recipe_id' value='" . $row["id"] . "'>";
-                echo "<button type='submit' class='btn btn-danger'>Favorilerden Çıkar</button>";
-                echo "</form>";
-                echo "</div>";
-                echo "</div>";
-                echo "</div>";
+                echo "<button type='submit' class='btn btn-danger'>Favorilerden Çıkar</button>"; echo "</div>";
                 echo "</div>";
                 echo "</div>";
             }
@@ -114,7 +100,8 @@ if(isset($_GET['category']) && !empty($_GET['category'])) {
         // Veritabanı bağlantısını kapat
         mysqli_close($conn);
         ?>
-        </div>
     </div>
+</div>
+
 </body>
 </html>

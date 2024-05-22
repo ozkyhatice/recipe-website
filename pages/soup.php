@@ -10,6 +10,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <style>
+        .card-link {
+            text-decoration: none;
+            color: #000000; /* Renk: Siyah */
+        }
+        .card-link:hover {
+            text-decoration: none; /* Alt çizgiyi kaldırmak için */
+        }
+    </style>
 </head>
 <body>
 <?php
@@ -40,13 +49,18 @@ $result = mysqli_query($conn, $sql);
 
 // Eğer sonuçlar varsa, kartları oluştur
 if (mysqli_num_rows($result) > 0) {
-    echo '<div class="container"><div class="row">';
+    echo '<div class="container">';
+    $counter = 0;
     while ($row = mysqli_fetch_assoc($result)) {
+        if ($counter % 4 == 0) {
+            echo '<div class="row justify-content-center">';
+        }
         // Resim yolunu belirle
         $imagePath = '/cook/images/' . $row["image"];
         $is_favorite = in_array($row["id"], $favorites);
         
-        echo '<div class="col-md-4">';
+        echo '<div class="col-md-3 mb-4">';
+        echo '<a href="recipe_details.php?id=' . $row["id"] . '" class="card-link">';
         echo '<div class="card">';
         echo '<img src="' . $imagePath . '" class="card-img-top" alt="' . $row["recipe_name"] . '">';
         echo '<div class="card-body">';
@@ -59,9 +73,18 @@ if (mysqli_num_rows($result) > 0) {
         }
         echo '</div>';
         echo '</div>';
+        echo '</a>';
+        echo '</div>';
+        
+        $counter++;
+        if ($counter % 4 == 0) {
+            echo '</div>';
+        }
+    }
+    if ($counter % 4 != 0) {
         echo '</div>';
     }
-    echo '</div></div>';
+    echo '</div>';
 }
 
 // Veritabanı bağlantısını kapat

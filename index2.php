@@ -17,6 +17,7 @@
 
 <body>
 <?php
+    session_start();
     // Navbar'ı çağırıyoruz
     include './navbar2.php';
     ?>
