@@ -110,31 +110,37 @@ include ("../baglanti.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST['username']) && isset($_POST['password'])) {
-      $username = $_POST['username'];
-      $password = $_POST['password'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-      if (empty($username) || empty($password)) {
-          echo '<script>alert("Username or password empty!"); window.location.href= "./login.php";</script>';
-          exit();
+    if (empty($username) || empty($password)) {
+      echo '<script>alert("Username or password empty!"); window.location.href= "./login.php";</script>';
+      exit();
+    } else {
+      $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+      $result = mysqli_query($conn, $sql);
+
+      if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['role'] = $row['role']; // Store user role in session
+
+        // Çerez ayarlama
+        setcookie("username", $row['username'], time() + (86400 * 30), "/"); // 30 gün
+        setcookie("user_id", $row['id'], time() + (86400 * 30), "/");
+        setcookie("role", $row['role'], time() + (86400 * 30), "/");
+
+        if ($row['role'] == 'admin') {
+          header("Location: add_recipe.php"); // Redirect to admin dashboard
+        } else {
+          header("Location: /cook/index2.php"); // Redirect to normal user dashboard
+        }
       } else {
-          $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-          $result = mysqli_query($conn, $sql);
-
-          if (mysqli_num_rows($result) > 0) {
-              $row = mysqli_fetch_assoc($result);
-              $_SESSION['username'] = $row['username'];
-              $_SESSION['user_id'] = $row['id'];
-
-              // Çerez ayarlama
-              setcookie("username", $row['username'], time() + (86400 * 30), "/"); // 30 gün
-              setcookie("user_id", $row['id'], time() + (86400 * 30), "/");
-
-              header("Location: /cook/index2.php");
-          } else {
-              echo '<script>alert("Incorrect username or password!"); window.location.href= "./login.php";</script>';
-          }
-          mysqli_close($conn);
+        echo '<script>alert("Incorrect username or password!"); window.location.href= "./login.php";</script>';
       }
+      mysqli_close($conn);
+    }
   }
 
     elseif (isset($_POST["register"])) { // Kayıt formu gönderildiyse

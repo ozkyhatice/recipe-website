@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 22 May 2024, 12:40:11
+-- Üretim Zamanı: 22 May 2024, 13:12:51
 -- Sunucu sürümü: 10.4.32-MariaDB
 -- PHP Sürümü: 8.2.12
 
@@ -70,7 +70,8 @@ INSERT INTO `recipes` (`id`, `recipe_name`, `category`, `prep_time`, `cook_time`
 (23, 'deneme', 'Breakfast', 5, 5, '5', '5', 'images/mainc.jpg', 'Medium', 5),
 (24, 'hnc', 'Soup', 5, 7, 'u', 'u', 'images/desktop-wallpaper-yellow-lemon-yellow (1).jpg', 'Medium', 5),
 (25, 'hnc', 'Soup', 5, 7, 'u', 'u', 'images/desktop-wallpaper-yellow-lemon-yellow (1).jpg', 'Medium', 5),
-(26, 'b', 'Soup', 5, 5, '5', '5', 'images/desktop-wallpaper-yellow-lemon-yellow.jpg', 'Easy', 5);
+(26, 'b', 'Soup', 5, 5, '5', '5', 'images/desktop-wallpaper-yellow-lemon-yellow.jpg', 'Easy', 5),
+(27, 'denemetarif', 'Dessert', 4, 4, '4', '4', 'images/mainc.jpg', 'Hard', 4);
 
 -- --------------------------------------------------------
 
@@ -85,20 +86,23 @@ CREATE TABLE `users` (
   `email` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
-  `tel` varchar(255) DEFAULT NULL
+  `tel` varchar(255) DEFAULT NULL,
+  `role` enum('user','admin') NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Tablo döküm verisi `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `name`, `surname`, `tel`) VALUES
-(1, 'admin', '1', 'admin@example.com', 'admin', 'admin', '435646'),
-(2, 'admin', '1', 'admin@example.com', 'admin', 'admin', '435646'),
-(3, 'admi', '123', 'udemy2icin@gmail.com', 'xvc', 'g', '4564'),
-(4, 'admiasa', '12345', 'qwwqqwqdkjdcfkjscdjksdkcs@gmail.com', NULL, NULL, NULL),
-(5, 'adminregtwertg', '12345dfsg', 'pdfgi@gmail.com', NULL, NULL, NULL),
-(6, 'ozkyhatice', 'Strong123.', 'haticeozkaya@example.com', NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `name`, `surname`, `tel`, `role`) VALUES
+(1, 'admin', '1', 'admin@example.com', 'admin', 'admin', '435646', 'user'),
+(2, 'admin', '1', 'admin@example.com', 'admin', 'admin', '435646', 'user'),
+(3, 'admi', '123', 'udemy2icin@gmail.com', 'xvc', 'g', '4564', 'user'),
+(4, 'admiasa', '12345', 'qwwqqwqdkjdcfkjscdjksdkcs@gmail.com', NULL, NULL, NULL, 'user'),
+(5, 'adminregtwertg', '12345dfsg', 'pdfgi@gmail.com', NULL, NULL, NULL, 'user'),
+(6, 'ozkyhatice', 'Strong123.', 'haticeozkaya@example.com', NULL, NULL, NULL, 'user'),
+(7, 'zehra_hatice', 'Hatice.Zehra*Strong', 'zehrahatice@example.com', 'H&Z', 'Chefs', '', 'admin'),
+(8, 'ozkaya', 'ozkaya', 'ozkaya@example.com', NULL, NULL, NULL, 'user');
 
 -- --------------------------------------------------------
 
@@ -163,13 +167,13 @@ ALTER TABLE `user_favorites`
 -- Tablo için AUTO_INCREMENT değeri `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
