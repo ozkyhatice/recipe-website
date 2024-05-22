@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "DELETE FROM user_favorites WHERE user_id = '$user_id' AND recipe_id = '$recipe_id'";
 
     if (mysqli_query($conn, $sql)) {
-        header("Location: my_favorites.php"); // Başarılıysa profil sayfasına yönlendir
+        header("Location: my_favorites.php"); // Başarılıysa favoriler sayfasına yönlendir
         exit();
     } else {
         echo "Hata: " . mysqli_error($conn);

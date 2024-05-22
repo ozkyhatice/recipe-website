@@ -36,7 +36,8 @@ if(isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 
     // Favori listesinde mi kontrol et
-    $sql = "SELECT * FROM user_favorites WHERE user_id = (SELECT id FROM users WHERE username = '$username') AND recipe_id = '$recipe_id'";
+    $sql = "SELECT * FROM user_favorites WHERE user_id = (SELECT id FROM users WHERE username = '$username' LIMIT 1) AND recipe_id = '$recipe_id'";
+
     $result = mysqli_query($conn, $sql);
     $is_favorite = (mysqli_num_rows($result) == 1) ? true : false;
 }

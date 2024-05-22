@@ -23,9 +23,9 @@
 <body>
 <?php
 // Veritabanı bağlantısını ekleyin
+session_start(); // Oturumu başlat
 include("../baglanti.php");
 include("../navbar2.php");
-session_start(); // Oturumu başlat
 
 $conn = mysqli_connect("localhost", "root", "", "hzchefs");
 
@@ -60,7 +60,7 @@ if (mysqli_num_rows($result) > 0) {
         $is_favorite = in_array($row["id"], $favorites);
         
         echo '<div class="col-md-3 mb-4">';
-        echo '<a href="recipe_details.php?id=' . $row["id"] . '" class="card-link">';
+        echo '<a href="recipe_details.php?recipe_id=' . $row["id"] . '" class="card-link">';
         echo '<div class="card">';
         echo '<img src="' . $imagePath . '" class="card-img-top" alt="' . $row["recipe_name"] . '">';
         echo '<div class="card-body">';

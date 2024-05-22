@@ -50,7 +50,7 @@
         <li><a class="dropdown-item" href="/cook/pages/my_profile.php">My Profile</a></li>
         <li><a class="dropdown-item" href="/cook/pages/my_favorites.php">My Favorites</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+        <li><a class="dropdown-item" href="/cook/pages/logout.php">Logout</a></li>
       </ul>
     </div>
   </nav>

@@ -14,7 +14,7 @@ $username = $_SESSION['username'];
 $categoryFilter = "";
 
 // Check if category filter is provided in the request
-if(isset($_GET['category']) && !empty($_GET['category'])) {
+if (isset($_GET['category']) && !empty($_GET['category'])) {
     // Sanitize the category value to prevent SQL injection
     $categoryFilter = mysqli_real_escape_string($conn, $_GET['category']);
     // Add the category filter to the SQL query
@@ -52,47 +52,61 @@ if(isset($_GET['category']) && !empty($_GET['category'])) {
 <body>
     <?php include("../navbar2.php"); ?>
     <div class="container">
-    <h1 class="mb-4">My Favorite Recipes</h1>
-    <form action="" method="get" class="mb-3">
-        <div class="input-group">
-            <label class="input-group-text" for="categoryFilter">Filter by Category:</label>
-            <select class="form-select" id="categoryFilter" name="category">
-                <option value="">All</option>
-                <option value="Breakfast">Breakfast</option>
-                <option value="Soup">Soup</option>
-                <option value="Main Course">Main Course</option>
-                <option value="Dessert">Dessert</option>
-            </select>
-            <button type="submit" class="btn btn-primary">Apply Filter</button>
-        </div>
-    </form>
-    <div class="row">
+        <h1 class="mb-4">My Favorite Recipes</h1>
+        <form action="" method="get" class="mb-3">
+            <div class="input-group">
+                <label class="input-group-text" for="categoryFilter">Filter by Category:</label>
+                <select class="form-select" id="categoryFilter" name="category">
+                    <option value="" <?php echo (empty($_GET['category']) ? 'selected' : ''); ?>>All</option>
+                    <option value="Breakfast" <?php echo (isset($_GET['category']) && $_GET['category'] == 'Breakfast' ? 'selected' : ''); ?>>Breakfast</option>
+                    <option value="Soup" <?php echo (isset($_GET['category']) && $_GET['category'] == 'Soup' ? 'selected' : ''); ?>>Soup</option>
+                    <option value="Main Course" <?php echo (isset($_GET['category']) && $_GET['category'] == 'Main Course' ? 'selected' : ''); ?>>Main Course</option>
+                    <option value="Dessert" <?php echo (isset($_GET['category']) && $_GET['category'] == 'Dessert' ? 'selected' : ''); ?>>Dessert</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Apply Filter</button>
+            </div>
+        </form>
+        <div class="row">
         <?php
-        // Kullanıcının favori tariflerini al
+        include("../baglanti.php");
+
+        // Kullanıcı giriş yapmamışsa yönlendir
+        if (!isset($_SESSION['username'])) {
+            header("Location: ../login.php");
+            exit();
+        }
+
+        $user_id = $_SESSION['user_id']; // Kullanıcı ID'si oturumdan alınır
+
+        // Kullanıcının favori tariflerini çek
         $sql = "SELECT r.id, r.recipe_name, r.category, r.instructions
                 FROM recipes r
                 INNER JOIN user_favorites uf ON r.id = uf.recipe_id
-                INNER JOIN users u ON uf.user_id = u.id
-                WHERE u.username = '$username' $categoryFilter";
+                WHERE uf.user_id = '$user_id' $categoryFilter";
 
         $result = mysqli_query($conn, $sql);
 
         // Eğer sonuçlar varsa, tarifleri listele
         if (mysqli_num_rows($result) > 0) {
+            echo "<div class='container'>";
+            echo "<div class='row'>";
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='col-md-6 col-lg-4 mb-4'>";
                 echo "<div class='card h-100'>";
                 echo "<div class='card-body'>";
-                echo "<h5 class='card-title'>" . $row["recipe_name"] . "</h5>";
-                echo "<p class='card-text'>" . $row["instructions"] . "</p>";
+                echo "<h5 class='card-title'>" . htmlspecialchars($row["recipe_name"]) . "</h5>";
+                echo "<p class='card-text'>" . htmlspecialchars($row["instructions"]) . "</p>";
                 echo "<a href='recipe_details.php?recipe_id=" . $row["id"] . "' class='btn btn-primary'>View Recipe</a>";
-               
-                echo "<form action='remove_favorite.php' method='post'>";
+                echo "<form action='remove_favorite.php' method='post' style='display:inline-block; margin-top: 10px;'>";
                 echo "<input type='hidden' name='recipe_id' value='" . $row["id"] . "'>";
-                echo "<button type='submit' class='btn btn-danger'>Favorilerden Çıkar</button>"; echo "</div>";
+                echo "<button type='submit' class='btn btn-danger'>Favorilerden Çıkar</button>";
+                echo "</form>";
+                echo "</div>";
                 echo "</div>";
                 echo "</div>";
             }
+            echo "</div>";
+            echo "</div>";
         } else {
             echo "<p>There are no favorite recipes.</p>";
         }
@@ -100,8 +114,7 @@ if(isset($_GET['category']) && !empty($_GET['category'])) {
         // Veritabanı bağlantısını kapat
         mysqli_close($conn);
         ?>
+        </div>
     </div>
-</div>
-
 </body>
 </html>

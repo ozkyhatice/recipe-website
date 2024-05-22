@@ -6,6 +6,6 @@ session_destroy();
 
 // Başarılı yanıt döndür
 http_response_code(200);
-header("Location: ./login.php");
+header("Location: login.php");
 
 ?>
