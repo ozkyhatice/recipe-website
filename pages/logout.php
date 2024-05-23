@@ -1,11 +1,7 @@
 <?php
-
-
-// Oturumu sonlandır
-session_destroy();
-
-// Başarılı yanıt döndür
-http_response_code(200);
-header("Location: login.php");
-
+session_start();
+session_unset(); // Tüm oturum değişkenlerini temizler
+session_destroy(); // Oturumu sonlandırır
+header('Location: /cook/index.php');
+exit();
 ?>

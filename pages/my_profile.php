@@ -42,7 +42,9 @@
 <body>
 <?php
 include("../navbar2.php");
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include("../baglanti.php");
 
 if (!isset($_SESSION['username'])) {
@@ -63,32 +65,32 @@ if ($result && mysqli_num_rows($result) > 0) {
 ?>
 <div class="container">
     <h1>My Profile</h1>
-    <p><strong>Ad:</strong> <?php echo $ad; ?></p>
-    <p><strong>Soyad:</strong> <?php echo $soyad; ?></p>
-    <p><strong>Kullanıcı Adı:</strong> <?php echo $username; ?></p>
-    <p><strong>E-posta:</strong> <?php echo $email; ?></p>
-    <p><strong>Telefon:</strong> <?php echo $telefon; ?></p>
+    <p><strong>Name:</strong> <?php echo $ad; ?></p>
+    <p><strong>Surname:</strong> <?php echo $soyad; ?></p>
+    <p><strong>User Name::</strong> <?php echo $username; ?></p>
+    <p><strong>E-mail:</strong> <?php echo $email; ?></p>
+    <p><strong>Phone Number:</strong> <?php echo $telefon; ?></p>
 
-    <h2>Güncelle</h2>
+    <h1>Update</h1>
     <form action="update_profile.php" method="post">
-        <label for="ad">Ad:</label>
+        <label for="ad">Name:</label>
         <input type="text" id="ad" name="ad" value="<?php echo $ad; ?>" class="form-control"><br>
 
-        <label for="soyad">Soyad:</label>
+        <label for="soyad">Surname:</label>
         <input type="text" id="soyad" name="soyad" value="<?php echo $soyad; ?>" class="form-control"><br>
 
-        <label for="email">E-posta:</label>
+        <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" value="<?php echo $email; ?>" class="form-control"><br>
 
-        <label for="telefon">Telefon:</label>
+        <label for="telefon">Phone Number:</label>
         <input type="tel" id="telefon" name="telefon" value="<?php echo $telefon; ?>" class="form-control"><br>
 
-        <label for="password">Şifre:</label>
-        <input type="password" id="password" name="password" placeholder="Yeni şifrenizi girin" class="form-control"><br>
-        <label for="password_confirm">Şifre Tekrar:</label>
-        <input type="password" id="password_confirm" name="password_confirm" placeholder="Yeni şifrenizi tekrar girin" class="form-control"><br>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter you new password" class="form-control"><br>
+        <label for="password_confirm">Password Again:</label>
+        <input type="password" id="password_confirm" name="password_confirm" placeholder="Enter you new password again" class="form-control"><br>
 
-        <input type="submit" value="Güncelle" class="btn btn-primary">
+        <input type="submit" value="Update" class="btn btn-primary">
     </form>
     <?php
         if (isset($_POST['password']) && isset($_POST['password_confirm'])) {
@@ -96,7 +98,7 @@ if ($result && mysqli_num_rows($result) > 0) {
             $password_confirm = $_POST['password_confirm'];
 
             if ($password != $password_confirm) {
-                echo "<p style='color: red;'>Şifreler eşleşmiyor. Lütfen aynı şifreyi iki kez girin.</p>";
+                echo "<p style='color: red;'>The passwords do not match. Please enter the same password twice.</p>";
             }
         }
     ?>
@@ -105,7 +107,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 </div>
 <?php
 } else {
-    echo "<div class='container'><p>Kullanıcı bilgileri bulunamadı.</p></div>";
+    echo "<div class='container'><p>User information not found.</p></div>";
 }
 ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

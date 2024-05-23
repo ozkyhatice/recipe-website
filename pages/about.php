@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../navbar2.css">
+    <link rel="stylesheet" href="../navbar.css">
     <link rel="stylesheet" href="../styles/about.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,10 +16,19 @@
 </head>
 <body>
 <?php
-session_start(); // Oturumu başlat
+session_start();
 
+// Kullanıcı girişi kontrolü
+// Kullanıcı girişi kontrolü
+$user_logged_in = isset($_SESSION['user_id']);
     // Navbar'ı çağırıyoruz
-    include '../navbar2.php';
+    if ($user_logged_in) {
+        include ("../navbar2.php"); // Giriş yapılmışsa bu navbar
+    } else {
+        include ("../navbar.php");  // Giriş yapılmamışsa bu navbar
+    }
+
+
     ?>
     <div class="about-section">
   <h1>Who Are We?</h1>
@@ -34,19 +44,19 @@ session_start(); // Oturumu başlat
         <h2>Hatice Özkaya</h2>
         <p class="title">Software Engineering Student</p>
         <p></p>
-        <p>hatice@example.com</p>
+        <p>haticeozkaya@gmail.com</p>
       </div>
     </div>
   </div>
 
   <div class="column">
     <div class="card">
-      <img src="../images/zehra.png" alt="Mike" style="width:100%">
+      <img src="../images/zehra.png" alt="Zehra" style="width:100%">
       <div class="container">
         <h2>Zehra Gürbüz</h2>
         <p class="title">Software Engineering Student</p>
         <p></p>
-        <p>zehra@example.com</p>
+        <p>zehragurbuz@gmail.com</p>
       </div>
     </div>
   </div>

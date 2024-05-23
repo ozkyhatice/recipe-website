@@ -57,6 +57,11 @@ if(isset($_SESSION['username'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../navbar2.css">
     <link rel="stylesheet" href="../styles/view_recipe.css">
+    <style>
+        body {
+    background-color:#e8f5ff ; /* Arka plan rengi */
+}
+    </style>
 </head>
 <body>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/cook/navbar2.php'); ?>
@@ -64,7 +69,7 @@ if(isset($_SESSION['username'])) {
         <h1 class="mb-4"><?php echo $recipe_name; ?></h1>
         <div class="row">
             <div class="col-md-6">
-                <img src="../images/<?php echo $image; ?>" class="img-fluid" alt="<?php echo $recipe_name; ?>">
+                <img src="../<?php echo $image; ?>" class="img-fluid" alt="<?php echo $recipe_name; ?>">
             </div>
             <div class="col-md-6">
                 <h3>Category: <?php echo $category; ?></h3>

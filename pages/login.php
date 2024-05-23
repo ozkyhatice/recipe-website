@@ -105,11 +105,11 @@
     </div>
     <!-- Add this section after the forms -->
     <?php
-session_start();
-include ("../baglanti.php");
 
+include ("../baglanti.php");
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (isset($_POST['username']) && isset($_POST['password'])) {
+  if (isset($_POST["login"])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -132,9 +132,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         setcookie("role", $row['role'], time() + (86400 * 30), "/");
 
         if ($row['role'] == 'admin') {
-          header("Location: add_recipe.php"); // Redirect to admin dashboard
+          header("Location: /cook/index.php"); // Redirect to admin dashboard
         } else {
-          header("Location: /cook/index2.php"); // Redirect to normal user dashboard
+          header("Location: /cook/index.php"); // Redirect to normal user dashboard
         }
       } else {
         echo '<script>alert("Incorrect username or password!"); window.location.href= "./login.php";</script>';

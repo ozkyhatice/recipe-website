@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <h1 class="navbar-brand" href="#">
-      <img src="./images/logo.png" alt="Logo" width="30" height="30">
+      <img src="/cook/images/logo.png" alt="Logo" width="30" height="30">
       H & Z  Chefs
     </h1>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./pages/about.php">ABOUT</a>
+          <a class="nav-link" href="/cook/pages/about.php">ABOUT</a>
         </li>
       </ul>
       
@@ -41,7 +41,7 @@
         </form>
     </div>
     <div class="ml-auto">
-      <form action="./pages/login.php" method="post">
+      <form action="/cook/pages/login.php" method="post">
         <button type="submit" class="btn btn-outline-success login-btn" id="loginButton">Sign In / Sign Up</button>
       </form>
     </div>

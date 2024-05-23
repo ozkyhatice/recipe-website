@@ -1,4 +1,10 @@
+<?php
+session_start();
 
+// Kullanıcı girişi kontrolü
+$user_logged_in = isset($_SESSION['user_id']);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="navbar2.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
@@ -17,13 +24,29 @@
     
     <?php
     // Navbar'ı çağırıyoruz
-    include './navbar.php';
+    if ($user_logged_in) {
+        include 'navbar2.php'; // Giriş yapılmışsa bu navbar
+    } else {
+        include 'navbar.php';  // Giriş yapılmamışsa bu navbar
+    }
     ?>
 
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="./images/cookingwithavocado912.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item active">
+                <img src="./images/hamburger.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item active">
+                <img src="./images/salad.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item active">
+                <img src="./images/snack.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item active">
+                <img src="./images/ramen.jpg" class="d-block w-100" alt="...">
             </div>
 
         </div>

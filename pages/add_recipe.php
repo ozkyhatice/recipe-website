@@ -87,15 +87,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Resim yükleme işlemi
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $image = $_FILES['image']['tmp_name'];
         $image_name = basename($_FILES['image']['name']);
+        $image_tmp = $_FILES['image']['tmp_name'];
         $target_dir = '../images/'; // Hedef dizin
         $target_file = $target_dir . $image_name;
 
         // Dosyayı hedef dizine taşı
-        if (move_uploaded_file($image, $target_file)) {
+        if (move_uploaded_file($image_tmp, $target_file)) {
             // Resim yolu veritabanına kaydedilecek
             $image_path = 'images/' . $image_name;
+        // Dosyayı hedef dizine taşı
+        
 
             $sql = "INSERT INTO recipes (recipe_name, category, prep_time, cook_time, ingredients, instructions, difficulty, serving_size, image) 
                     VALUES ('$recipe_name', '$category', '$prep_time', '$cook_time', '$ingredients', '$instructions', '$difficulty', '$serving_size', '$image_path')";

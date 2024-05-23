@@ -7,6 +7,11 @@
 a {
     text-decoration: none !important; /* a etiketinin altını çizgisini kaldır */
 }
+.carousel-item img {
+    width: 100%;
+    height: auto;
+}
+
 .card {
     border: 3px solid #cc2e38; /* Kartın kenarlarına ince bir çerçeve ekle */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) ; /* Kartın altına hafif bir gölge ekle */

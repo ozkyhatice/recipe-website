@@ -23,9 +23,21 @@
     ?>
 
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
-        <div class="carousel-inner">
+    <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="./images/cookingwithavocado912.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item active">
+                <img src="./images/hamburger.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item active">
+                <img src="./images/salad.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item active">
+                <img src="./images/snack.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item active">
+                <img src="./images/ramen.jpg" class="d-block w-100" alt="...">
             </div>
 
         </div>

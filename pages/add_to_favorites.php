@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
 
     // Veritabanı bağlantısını kontrol et
     if (!$conn) {
-        die("Veritabanı bağlantısı başarısız: " . mysqli_connect_error());
+        die("Database connection failed: " . mysqli_connect_error());
     }
 
     // Kullanıcının favoriye eklemek veya çıkarmak istediği tarifin ID'sini al
@@ -35,6 +35,13 @@ if (isset($_SESSION['user_id'])) {
     mysqli_close($conn);
 } else {
     // Kullanıcı giriş yapmamışsa, favorilere eklemek için önce giriş yapması gerektiğini bildir
-    echo "Favorilere tarif eklemek için önce giriş yapmalısınız.";
-}
+    echo "<script>
+            
+            if (confirm('Favorilere eklemek için önce giriş yapmalısınız.Giriş yapmak ister misiniz?')) {
+                window.location.href = 'login.php';
+            } else {
+                window.history.back();
+            }
+          </script>";
+        }
 ?>

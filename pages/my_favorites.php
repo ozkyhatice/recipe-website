@@ -32,7 +32,7 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../navbar2.css">
-    <link rel="stylesheet" href="../styles/my_profile.css">
+    <link rel="stylesheet" href="../styles/my_favorites.css">
     <style>
         body {
             overflow-y: scroll;
@@ -99,7 +99,7 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
                 echo "<a href='recipe_details.php?recipe_id=" . $row["id"] . "' class='btn btn-primary'>View Recipe</a>";
                 echo "<form action='remove_favorite.php' method='post' style='display:inline-block; margin-top: 10px;'>";
                 echo "<input type='hidden' name='recipe_id' value='" . $row["id"] . "'>";
-                echo "<button type='submit' class='btn btn-danger'>Favorilerden Çıkar</button>";
+                echo "<button type='submit' class='btn btn-danger'>Remove from favorites</button>";
                 echo "</form>";
                 echo "</div>";
                 echo "</div>";
