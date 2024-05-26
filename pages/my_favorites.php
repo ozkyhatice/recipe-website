@@ -27,7 +27,7 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
+    <title>My Favorite Recipes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
@@ -48,6 +48,7 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
             height: 100%;
         }
     </style>
+    
 </head>
 <body>
     <?php include("../navbar2.php"); ?>
@@ -95,7 +96,6 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
                 echo "<div class='card h-100'>";
                 echo "<div class='card-body'>";
                 echo "<h5 class='card-title'>" . htmlspecialchars($row["recipe_name"]) . "</h5>";
-                echo "<p class='card-text'>" . htmlspecialchars($row["instructions"]) . "</p>";
                 echo "<a href='recipe_details.php?recipe_id=" . $row["id"] . "' class='btn btn-primary'>View Recipe</a>";
                 echo "<form action='remove_favorite.php' method='post' style='display:inline-block; margin-top: 10px;'>";
                 echo "<input type='hidden' name='recipe_id' value='" . $row["id"] . "'>";

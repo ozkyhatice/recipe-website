@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <title>Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../navbar.css">
+    <link rel="stylesheet" href="/cook/navbar2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <style>
+        .card-link {
+            text-decoration: none;
+            color: #000000; /* Renk: Siyah */
+        }
+        .card-link:hover {
+            text-decoration: none; /* Alt çizgiyi kaldırmak için */
+        }
+        .card-img-top {
+            width: 100%;
+            height: 200px; /* Varsayılan yükseklik */
+            object-fit: cover; /* Görüntüyü kırp ve tam ekran yap */
+        }
+    </style>
+</head>
+<body>
+    <?php
+    session_start();
+    include("../baglanti.php");
+
+    $user_logged_in = isset($_SESSION['user_id']);
+    $user_role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
+
+    // Navbar'ı çağırıyoruz
+    if ($user_logged_in) {
+        include("../navbar2.php"); // Giriş yapılmışsa bu navbar
+    } else {
+        include("../navbar.php");  // Giriş yapılmamışsa bu navbar
+    }
+
+    function searchRecipe($search_term, $conn) {
+        $query = "SELECT * FROM recipes WHERE recipe_name LIKE '%$search_term%'";
+        $result = mysqli_query($conn, $query);
+        $recipes = array();
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $recipes[] = $row;
+            }
+        }
+        return $recipes;
+    }
+
+    // Arama formu gönderildiğinde işlem yap
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
+        $search_term = $_GET['search'];
+        // Arama fonksiyonunu çağırarak tarifleri getir
+        $search_results = searchRecipe($search_term, $conn);
+    }
+    ?>
+
+    <div class="container mt-4">
+        <h2>Search Results</h2>
+        <?php if (!empty($search_results)): ?>
+            <div class="row">
+                <?php foreach ($search_results as $recipe): ?>
+                    <div class="col-md-3 mb-4">
+                        <a href="recipe_details.php?recipe_id=<?php echo $recipe['id']; ?>" class="card-link">
+                            <div class="card">
+                                <img src="<?php echo '../' . htmlspecialchars($recipe['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($recipe['recipe_name']); ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo htmlspecialchars($recipe['recipe_name']); ?></h5>
+                                    <?php
+                                    $is_favorite = false; // Varsayılan olarak favori değil
+                                    if ($user_logged_in) {
+                                        $user_id = $_SESSION['user_id'];
+                                        $fav_sql = "SELECT * FROM user_favorites WHERE user_id = '$user_id' AND recipe_id = " . $recipe['id'];
+                                        $fav_result = mysqli_query($conn, $fav_sql);
+                                        if (mysqli_num_rows($fav_result) > 0) {
+                                            $is_favorite = true; // Favori ise true yap
+                                        }
+                                    }
+
+                                    if ($is_favorite) {
+                                        echo '<a href="add_to_favorites.php?id=' . $recipe['id'] . '&action=remove" class="btn btn-danger" onclick="refreshPage()">Remove from favorites</a>';
+                                    } else {
+                                        echo '<a href="add_to_favorites.php?id=' . $recipe['id'] . '&action=add" class="btn btn-primary" onclick="refreshPage()">Add to favorites</a>';
+                                    }
+
+                                    if ($user_role === 'admin') {
+                                        echo '<div class="button-group">';
+                                        echo '<a href="edit_recipe.php?recipe_id=' . $recipe['id'] . '" class="btn btn-warning" style="display: inline-block; width: 100px; margin-right: 5px;">Edit</a>';
+                                        echo '<a href="delete_recipe.php?recipe_id=' . $recipe['id'] . '" class="btn btn-danger" onclick="return confirm(\'Are you sure you want to delete this recipe?\')" style="display: inline-block; width: 100px;">Delete</a>';
+                                        echo '</div>';
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p>No recipes found for "<?php echo htmlspecialchars($search_term); ?>"</p>
+        <?php endif; ?>
+    </div>
+
+    <?php
+    // Veritabanı bağlantısını kapat
+    mysqli_close($conn);
+    ?>
+    <?php include('../footer.php'); ?>
+    <script>
+        function refreshPage() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>

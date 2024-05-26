@@ -12,7 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <title>H & Z  Chefs</title>
 </head>
 
 <body>
@@ -27,16 +28,16 @@
             <div class="carousel-item active">
                 <img src="./images/cookingwithavocado912.jpg" class="d-block w-100" alt="...">
             </div>
-            <div class="carousel-item active">
+            <div class="carousel-item">
                 <img src="./images/hamburger.jpg" class="d-block w-100" alt="...">
             </div>
-            <div class="carousel-item active">
+            <div class="carousel-item">
                 <img src="./images/salad.jpg" class="d-block w-100" alt="...">
             </div>
-            <div class="carousel-item active">
+            <div class="carousel-item">
                 <img src="./images/snack.jpg" class="d-block w-100" alt="...">
             </div>
-            <div class="carousel-item active">
+            <div class="carousel-item">
                 <img src="./images/ramen.jpg" class="d-block w-100" alt="...">
             </div>
 

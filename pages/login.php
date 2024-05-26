@@ -153,18 +153,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo "<script>
                   alert('Please fill all fields!'); window.location.href='./login.php';
                 </script>";
-          exit;
+          exit();
       }
       if (strlen($new_username) < 5) {
         $_SESSION['register_error'] = "Kullanıcı adı en az 5 karakter olmalıdır.";
         header("Location: ./login.php");
-        exit;
+        exit();
     }
 
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['register_error'] = "Geçersiz e-posta adresi formatı.";
         header("Location: ./login.php");
-        exit;
+        exit();
     }
 
     // E-posta adresinin alan adını alma
@@ -174,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!checkdnsrr($domain, "MX")) {
         $_SESSION['register_error'] = "E-posta adresi alanı doğrulanamadı.";
         header("Location: ./login.php");
-        exit;
+        exit();
     }
 
       // Kullanıcı adının benzersiz olup olmadığını kontrol etme
@@ -184,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo "<script>
                   alert('This username is already taken! Please choose a different one.'); window.location.href='./login.php';
                 </script>";
-          exit;
+          exit();
       }
       $check_email_query = "SELECT * FROM users WHERE email='$email'";
         $check_email_result = mysqli_query($conn, $check_email_query);
@@ -192,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>
                     alert('This email is already registered! Please use a different one.'); window.location.href='./login.php';
                   </script>";
-            exit;
+            exit();
         }
 
       
@@ -202,7 +202,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo "<script>
                   alert('User registered successfully!'); window.location.href='./login.php';
                 </script>";
-          exit;
+          exit();
       } else {
           echo "Error: " . $sql . "<br>" . mysqli_error($conn);
       }

@@ -1,8 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <h1 class="navbar-brand" href="#">
-      <img src="/cook/images/logo.png" alt="Logo" width="30" height="30">
-      H & Z  Chefs
-    </h1>
+<a class="navbar-brand" href="/cook/index.php">
+  <h1>
+    <img src="/cook/images/logo.png" alt="Logo" width="30" height="30">
+    H & Z Chefs
+  </h1>
+</a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,7 +36,7 @@
       
     </div>
     <div class="searchsubmit">
-      <form class="form-inline my-2 my-lg-0" method="get" action="">
+      <form class="form-inline my-2 my-lg-0" method="get" action="/cook/pages/search_result.php">
           <div class="d-flex align-items-center"> <!-- Add a container to align items -->
             <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

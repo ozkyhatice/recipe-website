@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <title>Add Recipe</title>
 </head>
 <body>
@@ -61,10 +62,7 @@
             <button type="submit">Submit Recipe</button>
         </form>
     </div>
-    <?php
-    // Footer'ı çağırıyoruz
-    include '../footer.php';
-    ?>
+    
     <script src="/cook/js/add_recipes.js"></script>
 </body>
 </html>
@@ -103,15 +101,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     VALUES ('$recipe_name', '$category', '$prep_time', '$cook_time', '$ingredients', '$instructions', '$difficulty', '$serving_size', '$image_path')";
 
             if (mysqli_query($conn, $sql)) {
-                echo "Tarif başarıyla eklendi.";
+                echo "<div class='container'><div class='alert alert-success' role='alert'>Recipe successfully added.</div></div>";
             } else {
-                echo "Hata: " . $sql . "<br>" . mysqli_error($conn);
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
         } else {
-            echo "Resim yüklenirken hata oluştu.";
+            echo "An error occurred while uploading the image";
         }
     } else {
-        echo "Resim dosyası yüklenirken hata oluştu: " . $_FILES['image']['error'];
+        echo "An error occurred while uploading the image file " . $_FILES['image']['error'];
     }
 }
 ?>
