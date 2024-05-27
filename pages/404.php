@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
-            background-color: #cc2e38; /* Background color */
+            background-color: #cc2e38;
         }
         h1 {
             font-size: 50px;

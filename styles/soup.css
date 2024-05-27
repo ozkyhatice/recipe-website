@@ -12,40 +12,38 @@ img{
     height:100 px;
 }
 body {
-    background-color:#e8f5ff ; /* Arka plan rengi */
-}/* Kartların genel stili */
+    background-color:#e8f5ff ;
+}
 .card {
     margin-bottom: 20px;
-    border: 1px solid #ddd; /* Kenarlık */
-    border-radius: 10px; /* Köşeleri yuvarlak yap */
-    transition: box-shadow 0.3s; /* Geçiş efekti */
+    border: 1px solid #ddd; 
+    border-radius: 10px;
+    transition: box-shadow 0.3s; 
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Kartın üzerine gelindiğinde gölge efekti */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .card-title {
-    font-size: 1.2rem; /* Başlık font boyutu */
+    font-size: 1.2rem; 
 }
 
 .card-text {
-    font-size: 1rem; /* Metin font boyutu */
+    font-size: 1rem;
 }
 
-/* Favori butonlarının stilini düzenleme */
 .btn-primary,
 .btn-danger {
     margin-top: 10px;
-    width: 100%; /* Buton genişliği */
+    width: 100%;
 }
 
 .btn-danger {
-    background-color: #dc3545; /* Kırmızı renk */
-    border-color: #dc3545; /* Kenarlık rengi */
+    background-color: #dc3545; 
+    border-color: #dc3545; 
 }
 
-/* Butonlara hover efekti */
 .btn-primary:hover,
 .btn-danger:hover {
     opacity: 0.8;

@@ -15,15 +15,15 @@
     <style>
         .card-link {
             text-decoration: none;
-            color: #000000; /* Renk: Siyah */
+            color: #000000; 
         }
         .card-link:hover {
-            text-decoration: none; /* Alt çizgiyi kaldırmak için */
+            text-decoration: none; 
         }
         .card-img-top {
             width: 100%;
-            height: 200px; /* Varsayılan yükseklik */
-            object-fit: cover; /* Görüntüyü kırp ve tam ekran yap */
+            height: 200px;
+            object-fit: cover; 
         }
     </style>
 </head>
@@ -37,9 +37,9 @@
 
     // Navbar'ı çağırıyoruz
     if ($user_logged_in) {
-        include("../navbar2.php"); // Giriş yapılmışsa bu navbar
+        include("../navbar2.php"); 
     } else {
-        include("../navbar.php");  // Giriş yapılmamışsa bu navbar
+        include("../navbar.php");  
     }
 
     function searchRecipe($search_term, $conn) {
@@ -54,10 +54,8 @@
         return $recipes;
     }
 
-    // Arama formu gönderildiğinde işlem yap
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
         $search_term = $_GET['search'];
-        // Arama fonksiyonunu çağırarak tarifleri getir
         $search_results = searchRecipe($search_term, $conn);
     }
     ?>
@@ -74,13 +72,13 @@
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($recipe['recipe_name']); ?></h5>
                                     <?php
-                                    $is_favorite = false; // Varsayılan olarak favori değil
+                                    $is_favorite = false; 
                                     if ($user_logged_in) {
                                         $user_id = $_SESSION['user_id'];
                                         $fav_sql = "SELECT * FROM user_favorites WHERE user_id = '$user_id' AND recipe_id = " . $recipe['id'];
                                         $fav_result = mysqli_query($conn, $fav_sql);
                                         if (mysqli_num_rows($fav_result) > 0) {
-                                            $is_favorite = true; // Favori ise true yap
+                                            $is_favorite = true;
                                         }
                                     }
 
@@ -109,7 +107,6 @@
     </div>
 
     <?php
-    // Veritabanı bağlantısını kapat
     mysqli_close($conn);
     ?>
     <?php include('../footer.php'); ?>

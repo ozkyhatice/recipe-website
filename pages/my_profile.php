@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile</title>
 
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../navbar2.css">
@@ -63,7 +62,6 @@ if ($result && mysqli_num_rows($result) > 0) {
     $email = $row['email'];
     $telefon = $row['tel'];
 
-    // Process the form submission
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ad = $_POST['ad'];
         $soyad = $_POST['soyad'];
@@ -75,7 +73,6 @@ if ($result && mysqli_num_rows($result) > 0) {
         if ($password != $password_confirm) {
             $error_message = "The passwords do not match. Please enter the same password twice.";
         } else {
-            // Update the user information in the database
             
             $update_sql = "UPDATE users SET name='$ad', surname='$soyad', email='$email', tel='$telefon', password='$password' WHERE username='$username'";
             if (mysqli_query($conn, $update_sql)) {

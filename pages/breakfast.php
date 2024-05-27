@@ -16,40 +16,32 @@
     <style>
         .card-link {
             text-decoration: none;
-            color: #000000; /* Renk: Siyah */
+            color: #000000;
         }
         .card-link:hover {
-            text-decoration: none; /* Alt çizgiyi kaldırmak için */
+            text-decoration: none;
         }
         .card-img-top {
             width: 100%;
-            height: 200px; /* Varsayılan yükseklik */
-            object-fit: cover; /* Görüntüyü kırp ve tam ekran yap */
+            height: 200px; 
+            object-fit: cover; 
         }
     </style>
 </head>
 <body>
 <?php
-// Veritabanı bağlantısını ekleyin
-session_start(); // Oturumu başlat
+session_start();
 include("../baglanti.php");
 $user_logged_in = isset($_SESSION['user_id']);
 $user_role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
-    // Navbar'ı çağırıyoruz
     if ($user_logged_in) {
-        include ("../navbar2.php"); // Giriş yapılmışsa bu navbar
+        include ("../navbar2.php");
     } else {
-        include ("../navbar.php");  // Giriş yapılmamışsa bu navbar
+        include ("../navbar.php");  
     }
 
-$conn = mysqli_connect("localhost", "root", "", "hzchefs");
 
-// Bağlantıyı kontrol edin
-if (!$conn) {
-    die("Database connection failed: " . mysqli_connect_error());
-}
-
-// Kullanıcının favori tariflerini al
+// Kullanıcının favori tariflerini alacağımız sorgu:
 $user_id = $user_logged_in ? $_SESSION['user_id'] : null;
 $fav_sql = "SELECT recipe_id FROM user_favorites WHERE user_id = '$user_id'";
 $fav_result = mysqli_query($conn, $fav_sql);
@@ -58,11 +50,9 @@ while ($fav_row = mysqli_fetch_assoc($fav_result)) {
     $favorites[] = $fav_row['recipe_id'];
 }
 
-// SQL sorgusu - kahvaltı kategorisindeki tüm tarifleri al
 $sql = "SELECT * FROM recipes WHERE category = 'Breakfast'";
 $result = mysqli_query($conn, $sql);
 
-// Eğer sonuçlar varsa, kartları oluştur
 if (mysqli_num_rows($result) > 0) {
     echo '<div class="container">';
     $counter = 0;
@@ -70,7 +60,6 @@ if (mysqli_num_rows($result) > 0) {
         if ($counter % 4 == 0) {
             echo '<div class="row justify-content-center">';
         }
-        // Resim yolunu belirle
         $imagePath = '../' . $row["image"];
         $is_favorite = in_array($row["id"], $favorites);
         
@@ -108,7 +97,6 @@ echo '</div>';
     echo '</div>';
 }
 
-// Veritabanı bağlantısını kapat
 mysqli_close($conn);
 
 ?>

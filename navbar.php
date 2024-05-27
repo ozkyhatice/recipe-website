@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand" href="/cook/index.php">
   <h1>
@@ -26,7 +27,6 @@
             <a class="dropdown-item" href="/cook/pages/soup.php">Soup</a>
         <a class="dropdown-item" href="/cook/pages/main.php">Main Course</a>
             <a class="dropdown-item" href="/cook/pages/dessert.php">Dessert</a>
-            <!-- <div class="dropdown-divider"></div> -->
           </div>
         </li>
         <li class="nav-item">

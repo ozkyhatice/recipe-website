@@ -22,15 +22,12 @@
 include("../baglanti.php");
 include("../navbar2.php");
 
-// Tarif ID'sini al
 $recipeId = $_GET['recipe_id'];
 
-// Veritabanından tarif bilgilerini al
 $sql = "SELECT * FROM recipes WHERE id='$recipeId'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
-// Tarif bilgilerini değişkenlere ata
 $recipeName = $row['recipe_name'];
 $category = $row['category'];
 $preparationTime = $row['prep_time'];
@@ -117,9 +114,7 @@ $imagePath = $row['image'];
     </div>
 </div>
 <?php
-// Form gönderildiğinde verileri işle
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Formdan gelen verileri al
     $recipeId = $_POST['recipe_id'];
     $recipeName = $_POST['recipe_name'];
     $category = $_POST['category'];
@@ -130,26 +125,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $difficulty = $_POST['difficulty'];
     $servingSize = $_POST['serving_size'];
 
-    // Resim yükleme işlemi
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $imageName = basename($_FILES['image']['name']);
         $imageTmp = $_FILES['image']['tmp_name'];
-        $targetDir = '../images/'; // Hedef dizin
+        $targetDir = '../images/';
         $targetFile = $targetDir . $imageName;
 
-        // Dosyayı hedef dizine taşı
         if (move_uploaded_file($imageTmp, $targetFile)) {
-            // Resim yolu veritabanına kaydedilecek
             $imagePath = 'images/' . $imageName;
         } else {
             echo "Resim yüklenirken bir hata oluştu.";
         }
     } else {
-        // Eğer yeni bir resim yüklenmediyse, mevcut resmin yolu kullanılacak
         $imagePath = $imagePath;
     }
 
-    // Veritabanına güncelleme sorgusu yap
     $sql = "UPDATE recipes SET 
                 recipe_name='$recipeName', 
                 category='$category', 

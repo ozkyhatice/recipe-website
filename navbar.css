@@ -7,9 +7,9 @@
     font-style: normal;
 }
 .navbar-brand {
-    color: #ffc12d; /* Navbar marka yazısı rengi */
-    font-weight: bold; /* Navbar marka yazısı kalınlığı */
-    margin-right: 20px; /* Navbar marka yazısı ile diğer içerik arasındaki boşluk */
+    color: #ffc12d; /* Navbar brand yazısı rengi */
+    font-weight: bold; /*  kalınlığı */
+    margin-right: 20px; /* yazı ile içerik arasındaki boşluk */
     transition: color 0.3s; /* Renk değişimi için geçiş süresi */
 }
 
@@ -29,18 +29,18 @@ footer {
 }
 
 .navbar {
-    margin-bottom: 20px; /* Navbar ile içerik arasına boşluk ekler */
+    margin-bottom: 20px; /* Navbarla içerik arasına boşluk*/
 }
 
 .carousel-inner img {
     margin-bottom: 20px; /* Resim ile içerik arasına boşluk ekler */
-    border: 3px solid #cc2e38; /* Kartın kenarlarına ince bir çerçeve ekle */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) ; /* Kartın altına hafif bir gölge ekle */
+    border: 3px solid #cc2e38; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) ; /* gölge */
 }
 
 footer {
-    margin-top: 20px; /* Footer ile içerik arasına boşluk ekler */
-    margin-bottom: 20px; /* Footer ile içerik arasına boşluk ekler */
+    margin-top: 20px; 
+    margin-bottom: 20px;
 }
 
 
@@ -48,7 +48,7 @@ footer {
     color:  #ffc12d;
 }
 .navbar-brand:hover {
-    color: #f6eff2; /* Hover efekti için yeni renk */
+    color: #f6eff2;
 }
 
 .nav-item .dropdown-toggle:hover{
@@ -65,19 +65,19 @@ footer {
 
 
 .navbar-nav {
-    display: flex; /* Öğeleri yatayda hizalar */
-    align-items: center; /* Dikeyde hizalar */
-    justify-content: space-between; /* Öğeleri yatayda eşit aralıklarla dağıtır */
+    display: flex; /* yatayda hizala */
+    align-items: center; /* Dikeyde hizala */
+    justify-content: space-between; /* eşit aralıklarla yerleştir */
 }
 
 .nav-item {
-    margin-right: 1px; /* Her öğe arasına sağdan boşluk bırakma */
+    margin-right: 1px;
 }
 .nav-item > .nav-link {
     color: #ffc12d;
 }
 .nav-link:hover {
-    color: #f6eff2; /* Üzerine gelindiğinde metin rengi */
+    color: #f6eff2; 
 }
 
 .searchsubmit {
@@ -85,14 +85,13 @@ footer {
     text-align: center;
 }
 
-/* Center the search input and button */
 .searchsubmit form {
     display: flex;
     justify-content: center;
 }
 
 .searchsubmit form .form-control {
-    margin-right: 10px; /* Adjust spacing between input and button */
+    margin-right: 10px; 
 }
 
 .login-btn,
@@ -100,7 +99,7 @@ footer {
     margin-left: 10px;
 }
 .btn:active {
-    background-color: #cc2e38 !important; /* Tıklama rengini istediğiniz renge ayarlayın */
+    background-color: #cc2e38 !important; 
 }
 
 .btn{
@@ -115,15 +114,15 @@ footer {
     border-radius: 50%;
     
 }
-@media (max-width: 767.98px) { /* Küçük ekranlar için */
+@media (max-width: 760px) { /* responsive yapma */
     .navbar-nav {
-        flex-direction: column; /* Öğeleri dikey hale getir */
+        flex-direction: column; /*dikey yapma */
     }
     .navbar-nav .nav-item {
         margin-right: 0;
-        margin-bottom: 5px; /* Öğeler arası boşluk */
+        margin-bottom: 5px; 
     }
     .navbar-collapse {
-        justify-content: center; /* Öğeleri ortala */
+        justify-content: center; 
     }
 }

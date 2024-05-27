@@ -4,12 +4,12 @@
     font-style: normal;
 }
 body {
-    background-color:#e8f5ff ; /* Arka plan rengi */
+    background-color:#e8f5ff ;
 }
 
 .container {
-    background-color: #ffc12d; /* Arka plan rengi */
-    box-shadow: 0 0 100px rgba(10, 10, 10, 100); /* Gölge */
+    background-color: #ffc12d;
+    box-shadow: 0 0 100px rgba(10, 10, 10, 100);
     max-width: 600px;
     margin: 0 auto;
     padding: 25px;
@@ -51,17 +51,17 @@ button:hover {
 
 
 .navbar {
-    background-color: #cc2e38 !important; /* Navbar arka plan rengi */
-    padding: 10px; /* Navbar içeriği ile arasındaki boşluk */
+    background-color: #cc2e38 !important; 
+    padding: 10px; 
     font-family: "Poetsen One", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 .navbar-brand {
-    color: #ffc12d; /* Navbar marka yazısı rengi */
-    font-weight: bold; /* Navbar marka yazısı kalınlığı */
-    margin-right: 20px; /* Navbar marka yazısı ile diğer içerik arasındaki boşluk */
-    transition: color 0.3s; /* Renk değişimi için geçiş süresi */
+    color: #ffc12d; 
+    font-weight: bold; 
+    margin-right: 20px; 
+    transition: color 0.3s; 
 }
 
 footer {
@@ -71,7 +71,7 @@ footer {
     width: 100%;
     padding: 20px;
     text-align: center;
-    transition: transform 0.3s ease; /* Hareket geçiş efekti */
+    transition: transform 0.3s ease; 
 }
 
 .card-title
@@ -80,18 +80,18 @@ footer {
 }
 
 .navbar {
-    margin-bottom: 20px; /* Navbar ile içerik arasına boşluk ekler */
+    margin-bottom: 20px; 
 }
 
 .carousel-inner img {
-    margin-bottom: 20px; /* Resim ile içerik arasına boşluk ekler */
-    border: 3px solid #cc2e38; /* Kartın kenarlarına ince bir çerçeve ekle */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) ; /* Kartın altına hafif bir gölge ekle */
+    margin-bottom: 20px; 
+    border: 3px solid #cc2e38; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) ;
 }
 
 footer {
-    margin-top: 20px; /* Footer ile içerik arasına boşluk ekler */
-    margin-bottom: 20px; /* Footer ile içerik arasına boşluk ekler */
+    margin-top: 20px; 
+    margin-bottom: 20px;
 }
 
 
@@ -99,7 +99,7 @@ footer {
     color:  #ffc12d;
 }
 .navbar-brand:hover {
-    color: #f6eff2; /* Hover efekti için yeni renk */
+    color: #f6eff2;
 }
 
 .nav-item .dropdown-toggle:hover{
@@ -116,19 +116,19 @@ footer {
 
 
 .navbar-nav {
-    display: flex; /* Öğeleri yatayda hizalar */
-    align-items: center; /* Dikeyde hizalar */
-    justify-content: space-between; /* Öğeleri yatayda eşit aralıklarla dağıtır */
+    display: flex; /* yatay*/
+    align-items: center; /* dikey */
+    justify-content: space-between; /* esit dagit */
 }
 
 .nav-item {
-    margin-right: 1px; /* Her öğe arasına sağdan boşluk bırakma */
+    margin-right: 1px;
 }
 .nav-item > .nav-link {
     color: #ffc12d;
 }
 .nav-link:hover {
-    color: #f6eff2; /* Üzerine gelindiğinde metin rengi */
+    color: #f6eff2;
 }
 
 .searchsubmit {
@@ -136,14 +136,13 @@ footer {
     text-align: center;
 }
 
-/* Center the search input and button */
 .searchsubmit form {
     display: flex;
     justify-content: center;
 }
 
 .searchsubmit form .form-control {
-    margin-right: 10px; /* Adjust spacing between input and button */
+    margin-right: 10px; 
 }
 
 .login-btn,
@@ -151,7 +150,7 @@ footer {
     margin-left: 10px;
 }
 .btn:active {
-    background-color: #cc2e38 !important; /* Tıklama rengini istediğiniz renge ayarlayın */
+    background-color: #cc2e38 !important; 
 }
 
 .btn{

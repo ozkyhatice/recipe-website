@@ -2,7 +2,6 @@
 session_start();
 include("../baglanti.php");
 
-// Kullanıcı giriş yapmamışsa yönlendir
 if (!isset($_SESSION['username'])) {
     header("Location: ../login.php");
     exit();
@@ -10,14 +9,10 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username'];
 
-// Initialize the category filter variable
 $categoryFilter = "";
 
-// Check if category filter is provided in the request
 if (isset($_GET['category']) && !empty($_GET['category'])) {
-    // Sanitize the category value to prevent SQL injection
     $categoryFilter = mysqli_real_escape_string($conn, $_GET['category']);
-    // Add the category filter to the SQL query
     $categoryFilter = " AND r.category = '$categoryFilter'";
 }
 
@@ -71,15 +66,13 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
         <?php
         include("../baglanti.php");
 
-        // Kullanıcı giriş yapmamışsa yönlendir
         if (!isset($_SESSION['username'])) {
             header("Location: ../login.php");
             exit();
         }
 
-        $user_id = $_SESSION['user_id']; // Kullanıcı ID'si oturumdan alınır
+        $user_id = $_SESSION['user_id']; 
 
-        // Kullanıcının favori tariflerini çek
         $sql = "SELECT r.id, r.recipe_name, r.category, r.instructions
                 FROM recipes r
                 INNER JOIN user_favorites uf ON r.id = uf.recipe_id
@@ -87,7 +80,6 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
 
         $result = mysqli_query($conn, $sql);
 
-        // Eğer sonuçlar varsa, tarifleri listele
         if (mysqli_num_rows($result) > 0) {
             echo "<div class='container'>";
             echo "<div class='row'>";
@@ -111,7 +103,6 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
             echo "<p>There are no favorite recipes.</p>";
         }
 
-        // Veritabanı bağlantısını kapat
         mysqli_close($conn);
         ?>
         </div>

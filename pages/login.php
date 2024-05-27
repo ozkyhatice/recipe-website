@@ -103,7 +103,6 @@
         </div>
       </div>
     </div>
-    <!-- Add this section after the forms -->
     <?php
 
 include ("../baglanti.php");
@@ -124,17 +123,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = mysqli_fetch_assoc($result);
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_id'] = $row['id'];
-        $_SESSION['role'] = $row['role']; // Store user role in session
+        $_SESSION['role'] = $row['role'];
 
-        // Çerez ayarlama
         setcookie("username", $row['username'], time() + (86400 * 30), "/"); // 30 gün
         setcookie("user_id", $row['id'], time() + (86400 * 30), "/");
         setcookie("role", $row['role'], time() + (86400 * 30), "/");
 
         if ($row['role'] == 'admin') {
-          header("Location: /cook/index.php"); // Redirect to admin dashboard
+          header("Location: /cook/index.php"); 
         } else {
-          header("Location: /cook/index.php"); // Redirect to normal user dashboard
+          header("Location: /cook/index.php"); 
         }
       } else {
         echo '<script>alert("Incorrect username or password!"); window.location.href= "./login.php";</script>';
@@ -143,12 +141,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-    elseif (isset($_POST["register"])) { // Kayıt formu gönderildiyse
+    elseif (isset($_POST["register"])) { 
       $new_username = $_POST["new_username"];
       $email = $_POST["email"];
       $new_password = $_POST["new_password"];
 
-      // Boş input kontrolü
       if (empty($new_username) || empty($email) || empty($new_password)) {
           echo "<script>
                   alert('Please fill all fields!'); window.location.href='./login.php';
@@ -167,17 +164,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // E-posta adresinin alan adını alma
-    $domain = explode('@', $email)[1];
+    
 
-    // Alan adının DNS kayıtlarını kontrol etme
-    if (!checkdnsrr($domain, "MX")) {
-        $_SESSION['register_error'] = "E-posta adresi alanı doğrulanamadı.";
-        header("Location: ./login.php");
-        exit();
-    }
-
-      // Kullanıcı adının benzersiz olup olmadığını kontrol etme
       $check_username_query = "SELECT * FROM users WHERE username='$new_username'";
       $check_username_result = mysqli_query($conn, $check_username_query);
       if (mysqli_num_rows($check_username_result) > 0) {
@@ -196,7 +184,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
       
-      // Kullanıcıyı veritabanına ekleme
       $sql = "INSERT INTO users (username, email, password) VALUES ('$new_username', '$email', '$new_password')";
       if (mysqli_query($conn, $sql)) {
           echo "<script>

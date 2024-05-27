@@ -1,15 +1,10 @@
 <?php
-// Session başlatma kontrolü
-if (session_status() == PHP_SESSION_NONE) {
     session_start();
-}
-
-// Kullanıcı rolünü kontrol eden fonksiyon
 function checkUserRole($user_id)
 {
     include("baglanti.php");
 
-    // Kullanıcı rolünü al
+    // Kullanıcı rolü
     $sql = "SELECT role FROM users WHERE id = '$user_id'";
     $result = mysqli_query($conn, $sql);
     if ($result) {
@@ -17,7 +12,6 @@ function checkUserRole($user_id)
         $user_role = $row['role'];
         mysqli_close($conn);
 
-        // Eğer kullanıcı admin ise true döndür, değilse false döndür
         return ($user_role === 'admin');
     } else {
         mysqli_close($conn);

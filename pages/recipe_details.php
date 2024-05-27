@@ -3,11 +3,9 @@ session_start();
 
 include($_SERVER['DOCUMENT_ROOT'] . '/cook/baglanti.php');
 
-// Tarif ID'sini al
 if (isset($_GET['recipe_id']) && !empty($_GET['recipe_id'])) {
     $recipe_id = $_GET['recipe_id'];
 
-    // Tarifi veritabanından al
     $sql = "SELECT * FROM recipes WHERE id = '$recipe_id'";
     $result = mysqli_query($conn, $sql);
 
@@ -31,18 +29,15 @@ if (isset($_GET['recipe_id']) && !empty($_GET['recipe_id'])) {
     exit;
 }
 
-// Kullanıcı giriş yapmışsa
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 
-    // Favori listesinde mi kontrol et
     $sql = "SELECT * FROM user_favorites WHERE user_id = (SELECT id FROM users WHERE username = '$username' LIMIT 1) AND recipe_id = '$recipe_id'";
 
     $result = mysqli_query($conn, $sql);
     $is_favorite = (mysqli_num_rows($result) == 1) ? true : false;
 }
 
-// Kullanıcının daha önce yorum yapmış olup olmadığını kontrol et
 $user_has_commented = false;
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
@@ -52,7 +47,6 @@ if (isset($_SESSION['username'])) {
     $user_has_commented = (mysqli_num_rows($result) > 0) ? true : false;
 }
 
-// Tarifin toplam puanını ve ortalama puanını al
 $total_rating = 0;
 $total_comments = 0;
 
@@ -85,7 +79,7 @@ $average_rating = ($total_comments > 0) ? round($total_rating / $total_comments,
 
     .rating {
         display: flex;
-        flex-direction: row-reverse; /* Yıldızların sağdan sola sıralanması */
+        flex-direction:row-reverse; /* Yıldızların sıralanması */
         font-size: 32px;
     }
 
@@ -95,12 +89,12 @@ $average_rating = ($total_comments > 0) ? round($total_rating / $total_comments,
 
     .rating label {
         cursor: pointer;
-        color: #ddd; /* Yıldızların varsayılan rengi */
+        color: #ddd; /* default renk */
     }
 
     .rating input:checked ~ label,
     .rating input:checked ~ label ~ label {
-        color: #FFD700; /* Yıldızların seçili (checked) rengi: Sarı */
+        color: #FFD700; /* seçili renk */
     }
 
     .comment {
@@ -160,7 +154,6 @@ $average_rating = ($total_comments > 0) ? round($total_rating / $total_comments,
 
             <ul>
     <?php 
-    // Malzemeleri parçalayarak her bir maddenin listelenmesi
     $ingredient_list = explode("\n", $ingredients);
     foreach ($ingredient_list as $ingredient) {
         echo "<li>$ingredient</li>";
@@ -171,7 +164,6 @@ $average_rating = ($total_comments > 0) ? round($total_rating / $total_comments,
 <p><strong>Instructions:</strong></p>
 <ul>
     <?php 
-    // Tarif talimatlarını parçalayarak her bir maddenin listelenmesi
     $instruction_list = explode("\n", $instructions);
     foreach ($instruction_list as $instruction) {
         echo "<li>$instruction</li>";
@@ -231,7 +223,6 @@ $user_has_commented): ?>
 <div class="container mt-4">
     <h3>Edit Your Comment and Rating</h3>
     <?php
-    // Kullanıcının yorumunu al
     $sql = "SELECT rating, comment FROM comments WHERE user_id = (SELECT id FROM users WHERE username = '$username' LIMIT 1) AND recipe_id = '$recipe_id'";
     $result = mysqli_query($conn, $sql);
     $comment_row = mysqli_fetch_assoc($result);
@@ -295,23 +286,19 @@ $user_has_commented): ?>
 </div>
 
 <?php
-// Mevcut yorum ve puanı güncelleme işlemi
-// Mevcut yorum ve puanı güncelleme işlemi
 if (isset($_POST['rating']) && isset($_POST['comment'])) {
     $new_rating = $_POST['rating'];
     $new_comment = $_POST['comment'];
 
-    // Kullanıcı ID'sini al
     $sql_user = "SELECT id FROM users WHERE username = ?";
     $stmt_user = mysqli_prepare($conn, $sql_user);
     mysqli_stmt_bind_param($stmt_user, "s", $username);
     mysqli_stmt_execute($stmt_user);
-    $result_user = mysqli_stmt_get_result($stmt_user);
+    $result_user = mysqli_stmt_POST_result($stmt_user);
 
     if ($row_user = mysqli_fetch_assoc($result_user)) {
         $user_id = $row_user['id'];
 
-        // Yorumu ve puanı güncelle
         $sql_update = "UPDATE comments SET rating = ?, comment = ? WHERE user_id = ? AND recipe_id = ?";
         $stmt_update = mysqli_prepare($conn, $sql_update);
         mysqli_stmt_bind_param($stmt_update, "isii", $new_rating, $new_comment, $user_id, $recipe_id);
